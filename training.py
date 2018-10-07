@@ -7,7 +7,7 @@ NUMBER_OF_PIECES = 6
 
 
 def one_hot_board(board):
-    if type(board) == decision_tree.DecisionTree:
+    if isinstance(board, decision_tree.DecisionTree):
         board = board.board
 
     raw_board = np.zeros((8, 8))
