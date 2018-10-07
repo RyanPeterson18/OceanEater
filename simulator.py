@@ -1,3 +1,5 @@
+import pickle
+
 import chess
 
 from decision_tree import create_tree, make_probabilistic_decision
@@ -31,5 +33,8 @@ def simulate_game(model):
             print("Move number:", number_of_moves, file=history)
             print(board, file=history)
             print(file=history)
+
+    with open("boards.pkl", 'wb') as f:
+        pickle.dump([player_1_boards, player_2_boards], f)
 
     return player_1_boards, player_2_boards, board

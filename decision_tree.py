@@ -1,9 +1,12 @@
 from collections import deque
+
 import chess
 from numpy.random import choice
+
 import ocean_eater_network
 
 COLORS = [WHITE, BLACK] = [True, False]
+DEFAULT_STATE_CAP = 100
 
 
 class DecisionTree:
@@ -19,14 +22,14 @@ class DecisionTree:
 # This will create the tree of board states to traverse
 # will also return list of leaf nodes
 # root must always be WHITE
-def create_tree(root, default_state_cap=1000):
+def create_tree(root, default_state_cap=DEFAULT_STATE_CAP):
     q = deque([root])
     # q contains all leaf nodes
 
     end = deque()  # contains all game-over states
 
     # generate tree breadth first
-    while 0 < len(q) + len(end) < default_state_cap:
+    while len(q) + len(end) < default_state_cap and 0 < len(q):
         current_tree = q.popleft()
         if current_tree.board.is_game_over():
             end.append(current_tree)
@@ -115,13 +118,11 @@ def get_probabilistic_max_child(root):
     # make array of probabilities for numpy.random
     if psum == 0:
         n = len(root.children)
-        p = [1/n for _ in range(n)]
+        p = [1 / n for _ in range(n)]
     else:
         p = [child.value / psum for child in root.children]
 
     return choice(root.children, p=p)
-
-
 
 
 """"
@@ -142,5 +143,3 @@ print(test_tree.board)
 create_tree(test_tree)
 print("Good")
 """""
-
-
