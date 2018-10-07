@@ -1,12 +1,15 @@
 import numpy as np
 
-from decision_tree import DecisionTree
+import decision_tree
 
 NUMBER_OF_POSITION_STATES = 12
 NUMBER_OF_PIECES = 6
 
 
 def one_hot_board(board):
+    if type(board) == decision_tree.DecisionTree:
+        board = board.board
+
     raw_board = np.zeros((8, 8))
     for i in range(64):
         piece = board.piece_at(i)
@@ -22,11 +25,8 @@ def one_hot_board(board):
 
 
 def one_hot_batch(batch):
-    if type(batch) == DecisionTree:
-        batch = map(lambda x: x.board, batch)
-
-    raw_boards = np.zeros((len(batch), 8, 8))
+    encoded_boards = np.zeros((len(batch), 8, 8))
     for i, board in enumerate(batch):
-        raw_boards[i] = one_hot_board(board)
+        encoded_boards[i] = one_hot_board(board)
 
-    return raw_boards
+    return encoded_boards
