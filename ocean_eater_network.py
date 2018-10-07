@@ -8,8 +8,8 @@ import training
 
 def create_model():
     model = Sequential()
-    model.add(Conv2D(32))
-    model.add(Conv2D(32))
+    model.add(Conv2D(32, (3, 3), activation='relu'))
+    model.add(Conv2D(32, (3, 3), activation='relu'))
     model.add(LSTM(64))
     model.add(LSTM(32))
     model.add(Dense(8))
