@@ -3,6 +3,7 @@ import chess
 from numpy.random import choice
 from ocean_eater_network import create_model
 
+
 COLORS = [WHITE, BLACK] = [True, False]
 
 
@@ -45,6 +46,8 @@ def create_tree(root, default_state_cap=1000):
 # Takes a list of decision tree leaf nodes
 # assigns values to them
 def evaluate_leaves(model, q):
+    processed = preprocess_decision_trees(q)
+
     for tree in q:
         tree.best_score = model.predict(tree.board)  # TODO must use preprocessing here
 
@@ -67,6 +70,7 @@ def minimax(tree):
             min_val = min(minimax(child), min_val)
         return min_val
 
+
 # takes a model and board state, creates a decision tree and populates its values
 # returns the tree
 def evaluate_possible_moves(model, board):
@@ -83,6 +87,13 @@ def make_decision(model, board):
     return max_child.board.peek()
 
 
+# Same, but with a probabilistic selection
+def make_probabilistic_decision(model, board):
+    root = evaluate_possible_moves(model, board)
+    max_child = get_proababilistic_max_child(root)
+    return max_child.board.peek()
+
+
 # takes a fully evaluated tree and returns the child which has the maximum value
 def get_max_child(root):
     max_val = -1
@@ -96,16 +107,22 @@ def get_max_child(root):
 
 def get_proababilistic_max_child(root):
     # normalize the weights to [0,1] from [-1,1]
-    sum = 0
+    psum = 0
     for child in root.children:
         child.value = (child.value + 1) / 2
-    child = numpy.random.choice
+        psum += child.value
+
+    # make array of probabilities for numpy.random
+    if psum == 0:
+        n = len(root.children)
+        p = [1/n for _ in range(n)]
+    else:
+        p = [child.value / psum for child in root.children]
+
+    return choice(root.children, p=p)
 
 
 
-
-def make_probabilistic_decision(model, board):
-    evaluate_possible_moves(model, root)
 
 
 # test code for
