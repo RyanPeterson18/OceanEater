@@ -3,7 +3,7 @@ from collections import deque
 from keras import Sequential
 from keras.layers import LSTM, Dense, Conv2D
 
-from training import one_hot_batch
+import training
 
 
 def create_model():
@@ -19,4 +19,4 @@ def create_model():
 
 
 def preprocess_decision_trees(tree_deque):
-    return one_hot_batch(tree_deque)
+    return training.one_hot_batch(tree_deque)
