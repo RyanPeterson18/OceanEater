@@ -1,8 +1,7 @@
 from collections import deque
 import chess
 from numpy.random import choice
-from ocean_eater_network import create_model
-
+import ocean_eater_network
 
 COLORS = [WHITE, BLACK] = [True, False]
 
@@ -46,10 +45,11 @@ def create_tree(root, default_state_cap=1000):
 # Takes a list of decision tree leaf nodes
 # assigns values to them
 def evaluate_leaves(model, q):
-    processed = preprocess_decision_trees(q)
+    processed = ocean_eater_network.preprocess_decision_trees(q)
+    predictions = model.predict(processed)
 
-    for tree in q:
-        tree.best_score = model.predict(tree.board)  # TODO must use preprocessing here
+    for i in range(len(q)):
+        q[i].best_score = predictions[i]
 
 
 # runs minimax, assuming leaves have been valued
@@ -90,7 +90,7 @@ def make_decision(model, board):
 # Same, but with a probabilistic selection
 def make_probabilistic_decision(model, board):
     root = evaluate_possible_moves(model, board)
-    max_child = get_proababilistic_max_child(root)
+    max_child = get_probabilistic_max_child(root)
     return max_child.board.peek()
 
 
@@ -105,7 +105,7 @@ def get_max_child(root):
     return root.children[max_index]
 
 
-def get_proababilistic_max_child(root):
+def get_probabilistic_max_child(root):
     # normalize the weights to [0,1] from [-1,1]
     psum = 0
     for child in root.children:
@@ -124,6 +124,7 @@ def get_proababilistic_max_child(root):
 
 
 
+""""
 
 # test code for
 
@@ -132,7 +133,6 @@ board = chess.Board()
 root = DecisionTree(board)
 evaluate_possible_moves(model, root)
 
-""""
 
 # Test Code: 
 
@@ -141,5 +141,12 @@ test_tree = DecisionTree(test)
 print(test_tree.board)
 create_tree(test_tree)
 print("Good")
-
 """""
+
+if __name__ == "__main__":
+
+    model = ocean_eater_network.create_model()
+    test_board = chess.Board()
+    make_decision(model, test_board)
+
+
