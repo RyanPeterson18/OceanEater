@@ -25,7 +25,7 @@ def one_hot_board(board):
 
 
 def one_hot_batch(batch):
-    encoded_boards = np.zeros((len(batch), 8, 8))
+    encoded_boards = np.zeros((len(batch), 8, 8, NUMBER_OF_POSITION_STATES))
     for i, board in enumerate(batch):
         encoded_boards[i] = one_hot_board(board)
 

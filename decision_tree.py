@@ -49,7 +49,7 @@ def evaluate_leaves(model, q):
     predictions = model.predict(processed)
 
     for i in range(len(q)):
-        q[i].best_score = predictions[i]
+        q[i].best_score = predictions[i][0]
 
 
 # runs minimax, assuming leaves have been valued
@@ -142,11 +142,5 @@ print(test_tree.board)
 create_tree(test_tree)
 print("Good")
 """""
-
-if __name__ == "__main__":
-
-    model = ocean_eater_network.create_model()
-    test_board = chess.Board()
-    make_decision(model, test_board)
 
 
