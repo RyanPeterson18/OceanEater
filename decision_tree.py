@@ -8,7 +8,7 @@ COLORS = [WHITE, BLACK] = [True, False]
 
 class DecisionTree:
     def __init__(self, board: chess.Board):
-        self.best_score = -1  # will hold valuation determined by predict and MinMax
+        self.value = -1  # will hold valuation determined by predict and MinMax
         self.board = board
         self.children = []
 
@@ -49,14 +49,14 @@ def evaluate_leaves(model, q):
     predictions = model.predict(processed)
 
     for i in range(len(q)):
-        q[i].best_score = predictions[i][0]
+        q[i].value = predictions[i][0]
 
 
 # runs minimax, assuming leaves have been valued
 def minimax(tree):
     # if WHITE turn, use max, else use min
     if len(tree.children) == 0:
-        return tree.best_score
+        return tree.value
 
     elif tree.board.turn == WHITE:
         max_val = -1
