@@ -6,7 +6,7 @@ from numpy.random import choice
 import ocean_eater_network
 
 COLORS = [WHITE, BLACK] = [True, False]
-DEFAULT_STATE_CAP = 1000
+DEFAULT_STATE_CAP = 10000
 
 
 class DecisionTree:

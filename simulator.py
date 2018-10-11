@@ -3,13 +3,13 @@ from pathlib import Path
 
 import chess
 
-from decision_tree import make_probabilistic_decision
+import decision_tree
 from ocean_eater_network import create_model
 
 model = create_model()
 
 
-def simulate_game(model, game_number=0):
+def simulate_game(model, game_number=0, use_probabilistic_decisions=True):
     board = chess.Board()
     player_1_boards = []
     player_2_boards = []
@@ -26,7 +26,11 @@ def simulate_game(model, game_number=0):
             if not is_white_turn:
                 board = board.mirror()
 
-            decision = make_probabilistic_decision(model, board)
+            if use_probabilistic_decisions:
+                decision = decision_tree.make_probabilistic_decision(model, board)
+            else:
+                decision = decision_tree.make_decision(model, board)
+
             board.push(decision)
 
             if is_white_turn:
