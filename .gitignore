@@ -4,3 +4,4 @@
 /__pycache__/
 /GameHistories/
 *.pkl
+uci_log.txt
