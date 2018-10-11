@@ -8,6 +8,7 @@ ENGINE_NAME = 'Ocean Eater 0.1'
 AUTHOR_NAME = 'Ryan Peterson and Joshua Marsh'
 
 # TODO: currently this doesn't actually search cap
+DEFAULT_STATE_CAP = 1000
 MIN_STATE_CAP = 50
 MAX_STATE_CAP = 10000000
 
