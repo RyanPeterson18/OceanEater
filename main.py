@@ -1,9 +1,18 @@
+import os
+
+import keras
 import numpy as np
+from keras.callbacks import EarlyStopping, ModelCheckpoint
 from tqdm import tqdm
 
 from ocean_eater_network import create_model
 from simulator import simulate_game
 from training import one_hot_batch
+
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+
+EARLY_STOPPING = EarlyStopping(monitor='loss', patience=5)
+MODEL_CHECKPOINTER = ModelCheckpoint("GameHistories/model.h5", monitor='loss')
 
 
 def unison_shuffled_copies(a, b):
@@ -70,14 +79,19 @@ def training_iteration(model, number_of_games=64):
 
     print("Starting loss:", model.evaluate(preprocessed_player_boards, player_y, verbose=0))
 
-    model.fit(preprocessed_player_boards, player_y, batch_size=32, epochs=10)
+    model.fit(preprocessed_player_boards, player_y, batch_size=32, epochs=100,
+              callbacks=[EARLY_STOPPING, MODEL_CHECKPOINTER])
 
     print("Final loss:", model.evaluate(preprocessed_player_boards, player_y, verbose=0))
 
 
-model = create_model()
+if os.path.exists(MODEL_CHECKPOINTER.filepath):
+    print("Using checkpoint model.")
+    model = keras.models.load_model(MODEL_CHECKPOINTER.filepath)
+else:
+    model = create_model()
 
-model.compile(optimizer='sgd', loss='mean_squared_error')
+model.compile(optimizer='rmsprop', loss='mean_squared_error')
 
-for i in tqdm(range(16)):
+for i in tqdm(range(8)):
     training_iteration(model, 32)

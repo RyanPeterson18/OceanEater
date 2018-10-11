@@ -15,7 +15,7 @@ def one_hot_board(board):
         return 0 if piece_type is None else piece_type
 
     raw_board = np.fromiter(map(get_piece_number, range(64)),
-                            np.int32).reshape((8, 8))
+                            np.int32).reshape((1, 8, 8))
 
     encoded_board = (np.arange(NUMBER_OF_POSITION_STATES) ==
                      raw_board[..., None] - 1).astype(int)
