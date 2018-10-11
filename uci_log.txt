@@ -1,0 +1,139 @@
+
+
+
+Starting new log!
+
+id name Ocean Eater 0.1
+id author Ryan Peterson and Joshua Marsh
+option name state_cap type spin default 1000 min 50 max 10000000
+uciok
+COMMAND: stop
+COMMAND: ucinewgame
+COMMAND: isready
+readyok
+COMMAND: ucinewgame
+COMMAND: isready
+COMMAND: stop
+COMMAND: position startpos
+COMMAND: isready
+readyok
+COMMAND: go depth 3
+bestmove g1h3
+COMMAND: position startpos moves g1h3 h7h6
+COMMAND: isready
+readyok
+COMMAND: go depth 3
+bestmove h3g5
+COMMAND: position startpos moves g1h3 h7h6 h3g5 h6g5
+COMMAND: isready
+readyok
+COMMAND: go depth 3
+bestmove h1g1
+COMMAND: position startpos moves g1h3 h7h6 h3g5 h6g5 h1g1 h8h2
+COMMAND: isready
+readyok
+COMMAND: go depth 3
+bestmove g1h1
+COMMAND: position startpos moves g1h3 h7h6 h3g5 h6g5 h1g1 h8h2 g1h1 h2h1
+COMMAND: isready
+readyok
+COMMAND: go depth 3
+bestmove g5g7
+COMMAND: stop
+COMMAND: quit
+
+
+
+Starting new log!
+
+id name Ocean Eater 0.1
+id author Ryan Peterson and Joshua Marsh
+option name state_cap type spin default 1000 min 50 max 10000000
+uciok
+COMMAND: stop
+COMMAND: ucinewgame
+COMMAND: isready
+readyok
+COMMAND: ucinewgame
+COMMAND: isready
+COMMAND: stop
+COMMAND: position startpos
+COMMAND: isready
+readyok
+COMMAND: go depth 3
+bestmove g1h3
+COMMAND: position startpos moves g1h3 h7h6
+COMMAND: isready
+readyok
+COMMAND: go depth 3
+bestmove h3g5
+COMMAND: position startpos moves g1h3 h7h6 h3g5 h6g5
+COMMAND: isready
+readyok
+COMMAND: go depth 3
+bestmove h1g1
+COMMAND: position startpos moves g1h3 h7h6 h3g5 h6g5 h1g1 h8h2
+COMMAND: isready
+readyok
+COMMAND: go depth 3
+bestmove g1h1
+COMMAND: position startpos moves g1h3 h7h6 h3g5 h6g5 h1g1 h8h2 g1h1 h2h1
+COMMAND: isready
+readyok
+COMMAND: go depth 3
+bestmove b1c3
+COMMAND: position startpos moves g1h3 h7h6 h3g5 h6g5 h1g1 h8h2 g1h1 h2h1 b1c3 a7a6
+COMMAND: isready
+readyok
+COMMAND: go depth 3
+bestmove c3d5
+COMMAND: position startpos moves g1h3 h7h6 h3g5 h6g5 h1g1 h8h2 g1h1 h2h1 b1c3 a7a6 c3d5 e7e6
+COMMAND: isready
+readyok
+COMMAND: go depth 3
+bestmove d5e7
+COMMAND: position startpos moves g1h3 h7h6 h3g5 h6g5 h1g1 h8h2 g1h1 h2h1 b1c3 a7a6 c3d5 e7e6 d5e7 f8e7
+COMMAND: isready
+readyok
+COMMAND: go depth 3
+bestmove a1b1
+COMMAND: position startpos moves g1h3 h7h6 h3g5 h6g5 h1g1 h8h2 g1h1 h2h1 b1c3 a7a6 c3d5 e7e6 d5e7 f8e7 a1b1 d7d6
+COMMAND: isready
+readyok
+COMMAND: go depth 3
+bestmove b1a1
+COMMAND: position startpos moves g1h3 h7h6 h3g5 h6g5 h1g1 h8h2 g1h1 h2h1 b1c3 a7a6 c3d5 e7e6 d5e7 f8e7 a1b1 d7d6 b1a1 d6d5
+COMMAND: isready
+readyok
+COMMAND: go depth 3
+bestmove a1b1
+COMMAND: position startpos moves g1h3 h7h6 h3g5 h6g5 h1g1 h8h2 g1h1 h2h1 b1c3 a7a6 c3d5 e7e6 d5e7 f8e7 a1b1 d7d6 b1a1 d6d5 a1b1 g8f6
+COMMAND: isready
+readyok
+COMMAND: go depth 3
+bestmove b1a1
+COMMAND: position startpos moves g1h3 h7h6 h3g5 h6g5 h1g1 h8h2 g1h1 h2h1 b1c3 a7a6 c3d5 e7e6 d5e7 f8e7 a1b1 d7d6 b1a1 d6d5 a1b1 g8f6 b1a1 b8c6
+COMMAND: isready
+readyok
+COMMAND: go depth 3
+bestmove a1b1
+COMMAND: position startpos moves g1h3 h7h6 h3g5 h6g5 h1g1 h8h2 g1h1 h2h1 b1c3 a7a6 c3d5 e7e6 d5e7 f8e7 a1b1 d7d6 b1a1 d6d5 a1b1 g8f6 b1a1 b8c6 a1b1 e6e5
+COMMAND: isready
+readyok
+COMMAND: go depth 3
+bestmove b1a1
+COMMAND: position startpos moves g1h3 h7h6 h3g5 h6g5 h1g1 h8h2 g1h1 h2h1 b1c3 a7a6 c3d5 e7e6 d5e7 f8e7 a1b1 d7d6 b1a1 d6d5 a1b1 g8f6 b1a1 b8c6 a1b1 e6e5 b1a1 e7c5
+COMMAND: isready
+readyok
+COMMAND: go depth 3
+bestmove a1b1
+COMMAND: position startpos moves g1h3 h7h6 h3g5 h6g5 h1g1 h8h2 g1h1 h2h1 b1c3 a7a6 c3d5 e7e6 d5e7 f8e7 a1b1 d7d6 b1a1 d6d5 a1b1 g8f6 b1a1 b8c6 a1b1 e6e5 b1a1 e7c5 a1b1 g5g4
+COMMAND: isready
+readyok
+COMMAND: go depth 3
+bestmove b1a1
+COMMAND: position startpos moves g1h3 h7h6 h3g5 h6g5 h1g1 h8h2 g1h1 h2h1 b1c3 a7a6 c3d5 e7e6 d5e7 f8e7 a1b1 d7d6 b1a1 d6d5 a1b1 g8f6 b1a1 b8c6 a1b1 e6e5 b1a1 e7c5 a1b1 g5g4 b1a1 g4g3
+COMMAND: isready
+readyok
+COMMAND: go depth 3
+bestmove a1b1
