@@ -1,10 +1,14 @@
 import sys
-from datetime import time
-
 import chess
-import time
+import keras
+from keras.callbacks import ModelCheckpoint
+import os
 from ocean_eater_network import create_model
-from decision_tree import make_decision
+from decision_tree import make_probabilistic_decision
+
+# There's a lot of code that is repeated and could be better
+# implemented as functions, but I don't have a firm grasp of
+# scope so I left it like this.
 
 
 # log file:
@@ -33,15 +37,20 @@ DEFAULT_STATE_CAP = 1000
 MIN_STATE_CAP = 50
 MAX_STATE_CAP = 10000000
 
-model = create_model()  # TODO: Later this should import a model
-# TODO: for now, we can only play as white. Expand to black by mirroring.
+
+MODEL_CHECKPOINTER = ModelCheckpoint("GameHistories/model.h5", monitor='loss')
+
+if os.path.exists(MODEL_CHECKPOINTER.filepath):
+    print("Using checkpoint model.")
+    model = keras.models.load_model(MODEL_CHECKPOINTER.filepath)
+else:
+    model = create_model()
 
 
 # initialize to empty string
 # wait for uci command to be provided
 while input().strip() != 'uci':
     pass  # do nothing
-
 
 # Now, identify
 print_log('id name ' + ENGINE_NAME)
@@ -50,8 +59,8 @@ print_log('id author ' + AUTHOR_NAME)
 # Specify options
 # State Cap is number of states
 print_log('option name state_cap type spin default ' + str(DEFAULT_STATE_CAP) +
-      ' min ' + str(MIN_STATE_CAP) +
-      ' max ' + str(MAX_STATE_CAP))
+          ' min ' + str(MIN_STATE_CAP) +
+          ' max ' + str(MAX_STATE_CAP))
 
 # Done specifying options
 print_log('uciok')
@@ -122,7 +131,6 @@ while not have_board:
     command = input().strip()
     log(command)
 
-
 while True:
     if command.startswith('quit'):
         sys.exit()
@@ -165,8 +173,7 @@ while True:
                     board.push(chess.Move.from_uci(move))
 
     elif command.startswith('go'):
-        move = chess.Move.uci(make_decision(model, board))
-        time.sleep(1)
+        move = chess.Move.uci(make_probabilistic_decision(model, board))
         print_log('bestmove ' + move)
 
     command = input().strip()

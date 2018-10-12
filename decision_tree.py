@@ -83,20 +83,6 @@ def evaluate_possible_moves(model, board):
     return root
 
 
-# takes a model and current board state in chess.Board format, returns a move
-def make_decision(model, board):
-    root = evaluate_possible_moves(model, board)
-    max_child = get_max_child(root)
-    return max_child.board.peek()
-
-
-# Same, but with a probabilistic selection
-def make_probabilistic_decision(model, board):
-    root = evaluate_possible_moves(model, board)
-    max_child = get_probabilistic_max_child(root)
-    return max_child.board.peek()
-
-
 # takes a fully evaluated tree and returns the child which has the maximum value
 def get_max_child(root):
     max_val = -1
@@ -123,6 +109,21 @@ def get_probabilistic_max_child(root):
         p = [child.value / psum for child in root.children]
 
     return choice(root.children, p=p)
+
+
+# TODO: make it so these can take in a search cap
+# takes a model and current board state in chess.Board format, returns a move
+def make_decision(model, board, ):
+    root = evaluate_possible_moves(model, board)
+    max_child = get_max_child(root)
+    return max_child.board.peek()
+
+
+# Same, but with a probabilistic selection
+def make_probabilistic_decision(model, board):
+    root = evaluate_possible_moves(model, board)
+    max_child = get_probabilistic_max_child(root)
+    return max_child.board.peek()
 
 
 """"
